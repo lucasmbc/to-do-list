@@ -3,6 +3,8 @@ import cors from "cors";
 import winston from "winston";
 import "./env.js";
 
+import tasksRouter from "./routes/tasks.route.js";
+
 const port = process.env.port;
 
 const { combine, timestamp, label, printf } = winston.format;
@@ -23,8 +25,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/register", registerRouter);
-app.use("/login", loginRouter);
+// app.use("/register", registerRouter);
+// app.use("/login", loginRouter);
 app.use("/tasks", tasksRouter);
 
 app.listen(port, () => logger.info("API Started!"));
