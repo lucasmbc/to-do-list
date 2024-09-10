@@ -4,6 +4,7 @@ import winston from "winston";
 import "./env.js";
 
 import tasksRouter from "./routes/tasks.route.js";
+import registerRouter from "./routes/register.route.js";
 
 const port = process.env.port;
 
@@ -25,7 +26,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// app.use("/register", registerRouter);
+app.use("/register", registerRouter);
 // app.use("/login", loginRouter);
 app.use("/tasks", tasksRouter);
 

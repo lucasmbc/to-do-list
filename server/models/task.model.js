@@ -1,5 +1,6 @@
 import DataTypes from "sequelize";
 import db from "../repositories/db.js";
+import User from "./register.model.js";
 
 const Task = db.define(
     "tarefas",
@@ -24,5 +25,7 @@ const Task = db.define(
     },
     { underscored: true }
 );
-// TODO Configurar a chave estrangeira usuario_id
+
+Task.belongsTo(User, { foreignKey: "usuarioId" });
+
 export default Task;
