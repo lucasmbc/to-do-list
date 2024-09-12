@@ -1,5 +1,8 @@
 import DataTypes from "sequelize";
 import db from "../repositories/db.js";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10;
 
 const User = db.define(
     "usuarios",
@@ -26,5 +29,14 @@ const User = db.define(
     },
     { underscored: true }
 );
+
+User.beforeCreate(async (user, options) => {
+    try {
+        const hash = await bcrypt.hash(user.senha, saltRounds);
+        user.senha = hash;
+    } catch (err) {
+        throw new Error(err);
+    }
+});
 
 export default User;
