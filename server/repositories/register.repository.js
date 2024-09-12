@@ -8,4 +8,12 @@ async function insertUser(user) {
     }
 }
 
-export default { insertUser };
+async function getUserEmail(email) {
+    try {
+        return await User.findOne({ where: { email: email } });
+    } catch (err) {
+        throw err;
+    }
+}
+
+export default { insertUser, getUserEmail };

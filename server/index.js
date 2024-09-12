@@ -5,6 +5,7 @@ import "./env.js";
 
 import tasksRouter from "./routes/tasks.route.js";
 import registerRouter from "./routes/register.route.js";
+import loginRouter from "./routes/login.route.js";
 
 const port = process.env.port;
 
@@ -27,7 +28,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/register", registerRouter);
-// app.use("/login", loginRouter);
+app.use("/login", loginRouter);
 app.use("/tasks", tasksRouter);
 
 app.use((err, req, res, next) => {
