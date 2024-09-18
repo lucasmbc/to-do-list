@@ -16,4 +16,12 @@ async function getUserEmail(email) {
     }
 }
 
-export default { insertUser, getUserEmail };
+async function findByIdUser(id) {
+    try {
+        return await User.findOne({ where: { id: id } });
+    } catch (err) {
+        throw err;
+    }
+}
+
+export default { insertUser, getUserEmail, findByIdUser };

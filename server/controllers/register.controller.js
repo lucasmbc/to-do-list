@@ -1,12 +1,15 @@
 import RegisterService from "../services/register.service.js";
+import { validationResult } from "express-validator";
 
 async function createUser(req, res, next) {
     try {
-        let user = req.body;
+        const result = validationResult(req);
 
-        if (!user.nome || !user.email || !user.senha) {
-            throw new Error("Nome, email e senha são obrigatórios.");
+        if (!result.isEmpty()) {
+            throw new Error(JSON.stringify(result.array(), null, 2));
         }
+
+        let user = req.body;
 
         user = await RegisterService.createUser(user);
         res.status(201).send(user);
